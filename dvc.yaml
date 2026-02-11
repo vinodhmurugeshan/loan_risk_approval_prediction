@@ -1,0 +1,46 @@
+
+stages:
+  features_offline:
+    cmd: python -m src.build_offline_features
+    deps:
+      - src/build_offline_features.py
+      - src/data_utils.py
+      - data/applications.csv
+      - data/labels.csv
+      - params.yaml
+    outs:
+      - feature_store/offline/offline_features.csv
+
+  split:
+    cmd: python -m src.split_data
+    deps:
+      - src/split_data.py
+      - feature_store/offline/offline_features.csv
+      - params.yaml
+    outs:
+      - data/processed/train.csv
+      - data/processed/test.csv
+
+  train:
+    cmd: python -m src.train
+    deps:
+      - src/train.py
+      - data/processed/train.csv
+      - data/processed/test.csv
+      - params.yaml
+
+  register_best:
+    cmd: python -m src.register_best
+    deps:
+      - src/register_best.py
+
+  build_online_store:
+    cmd: python -m src.build_online_store
+    deps:
+      - src/build_online_store.py
+      - src/data_utils.py
+      - data/applications.csv
+      - data/live_applications.csv
+      - params.yaml
+    outs:
+      - feature_store/online/feature_store.db

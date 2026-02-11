@@ -1,0 +1,21 @@
+
+windows:
+  total_apps_days: 120
+  avg_loan_days: 150
+  rejected_days: 90
+
+train:
+  test_size: 0.3
+  random_state: 42
+  model_type: "logreg"
+  Cs: [0.5, 2.0]
+  positive_label: 1
+
+paths:
+  applications: "data/applications.csv"
+  labels: "data/labels.csv"
+  live_applications: "data/live_applications.csv"
+  offline_features: "feature_store/offline/offline_features.csv"
+  online_store: "feature_store/online/feature_store.db"
+
+reference_date: null

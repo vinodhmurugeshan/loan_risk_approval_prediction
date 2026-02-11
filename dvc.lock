@@ -1,0 +1,108 @@
+schema: '2.0'
+stages:
+  features_offline:
+    cmd: python -m src.build_offline_features
+    deps:
+    - path: data/applications.csv
+      hash: md5
+      md5: ae7affc798e21278b4483525a907c453
+      size: 588
+    - path: data/labels.csv
+      hash: md5
+      md5: 4fbc8b95613ff179876d9dbf4658c26e
+      size: 73
+    - path: params.yaml
+      hash: md5
+      md5: 95a4abf93b4e66ad75c665161bcefcbc
+      size: 447
+    - path: src/build_offline_features.py
+      hash: md5
+      md5: 1ac0222126a3a64b16594819ae4d404a
+      size: 1261
+    - path: src/data_utils.py
+      hash: md5
+      md5: 47ec5a699b9e7a23cec3c2881c9319d4
+      size: 4241
+    outs:
+    - path: feature_store/offline/offline_features.csv
+      hash: md5
+      md5: 9d3ee2d29e1a8d08aff83aa0d709689b
+      size: 208
+  split:
+    cmd: python -m src.split_data
+    deps:
+    - path: feature_store/offline/offline_features.csv
+      hash: md5
+      md5: 9d3ee2d29e1a8d08aff83aa0d709689b
+      size: 208
+    - path: params.yaml
+      hash: md5
+      md5: 95a4abf93b4e66ad75c665161bcefcbc
+      size: 447
+    - path: src/split_data.py
+      hash: md5
+      md5: df01fb8f16eff3d4b7bdaa9fd92f9add
+      size: 951
+    outs:
+    - path: data/processed/test.csv
+      hash: md5
+      md5: ee39f201005b86fa10480dadabc226b9
+      size: 127
+    - path: data/processed/train.csv
+      hash: md5
+      md5: 3548d53bb847caf0c7c587e466e252c9
+      size: 148
+  train:
+    cmd: python -m src.train
+    deps:
+    - path: data/processed/test.csv
+      hash: md5
+      md5: ee39f201005b86fa10480dadabc226b9
+      size: 127
+    - path: data/processed/train.csv
+      hash: md5
+      md5: 3548d53bb847caf0c7c587e466e252c9
+      size: 148
+    - path: params.yaml
+      hash: md5
+      md5: 95a4abf93b4e66ad75c665161bcefcbc
+      size: 447
+    - path: src/train.py
+      hash: md5
+      md5: 9ed441cff98c40b8e8cb84878290a5b0
+      size: 3497
+  register_best:
+    cmd: python -m src.register_best
+    deps:
+    - path: src/register_best.py
+      hash: md5
+      md5: 12e89b9531f04b1674fde1614220dcea
+      size: 988
+  build_online_store:
+    cmd: python -m src.build_online_store
+    deps:
+    - path: data/applications.csv
+      hash: md5
+      md5: ae7affc798e21278b4483525a907c453
+      size: 588
+    - path: data/live_applications.csv
+      hash: md5
+      md5: 00258b87f4bc7d69ebf98020ca2a263b
+      size: 263
+    - path: params.yaml
+      hash: md5
+      md5: 95a4abf93b4e66ad75c665161bcefcbc
+      size: 447
+    - path: src/build_online_store.py
+      hash: md5
+      md5: 2043d44c9436afbd8b45791792385cce
+      size: 2213
+    - path: src/data_utils.py
+      hash: md5
+      md5: 47ec5a699b9e7a23cec3c2881c9319d4
+      size: 4241
+    outs:
+    - path: feature_store/online/feature_store.db
+      hash: md5
+      md5: 21cd04b4bf3314ea255e57bd105922dd
+      size: 12288

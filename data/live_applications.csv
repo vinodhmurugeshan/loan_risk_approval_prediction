@@ -1,0 +1,8 @@
+
+applicant_id,application_date,loan_amount,loan_purpose,approved
+A001,2026-02-01,120000,personal,0
+A002,2026-02-02,95000,travel,0
+A003,2026-02-03,130000,personal,0
+A011,2026-02-01,110000,personal,0
+A012,2026-02-02,90000,travel,0
+A013,2026-02-03,125000,personal,0
