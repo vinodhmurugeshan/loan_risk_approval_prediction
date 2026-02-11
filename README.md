@@ -67,7 +67,7 @@ mlflow ui --backend-store-uri "sqlite:///C:\Users\Vinodh.M\Documents\loan_risk_a
 mlflow ui --backend-store-uri sqlite:///mlflow.db --default-artifact-root mlartifacts --port 5006
 # open  http://127.0.0.1:5006
 ```
-## 12) Git push
+## 12) Git push for first time
 git init
 
 git status
@@ -83,6 +83,16 @@ then login to git hub and create a repo with the same name as the project folder
 git remote add origin https://github.com/vinodhmurugeshan/loan_risk_approval_prediction.git
 git branch -M main
 git push -u origin main
+
+## 13) Git push after some modifications
+git status
+
+git add .
+
+git commit -m "second commit"
+git log
+
+git push
 
 Notes:
 
