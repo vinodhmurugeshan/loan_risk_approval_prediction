@@ -68,10 +68,23 @@ mlflow ui --backend-store-uri sqlite:///mlflow.db --default-artifact-root mlarti
 # open  http://127.0.0.1:5006
 ```
 ## 12) Git push
+git init
+
+git status
+
+git add .
+
+git commit -m "First Commit from Local Machine"
+
+git log
+
+then login to git hub and create a repo with the same name as the project folder in local machine
 
 git remote add origin https://github.com/vinodhmurugeshan/loan_risk_approval_prediction.git
 git branch -M main
 git push -u origin main
+
 Notes:
+
 - Experiment: `loan_risk`, registered model: `loan_risk_model`.
 - Online inference uses SQLite features, not raw events.
